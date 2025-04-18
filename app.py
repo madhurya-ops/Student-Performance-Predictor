@@ -32,5 +32,10 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)})
 
+@app.after_request
+def add_header(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
+
 if __name__ == '__main__':
     app.run(debug=True)
